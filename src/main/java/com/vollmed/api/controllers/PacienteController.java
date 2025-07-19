@@ -1,9 +1,6 @@
 package com.vollmed.api.controllers;
 
-import com.vollmed.api.paciente.DadosCadastroPaciente;
-import com.vollmed.api.paciente.DadosListagemPaciente;
-import com.vollmed.api.paciente.Paciente;
-import com.vollmed.api.paciente.PacienteRepository;
+import com.vollmed.api.paciente.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +25,12 @@ public class PacienteController {
     @GetMapping
     public Page<DadosListagemPaciente> listarPacientes (@PageableDefault(size = 10, sort = "nome")Pageable paginacao) {
        return pacienteRepository.findByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizarPaciente(@RequestBody @Valid DadosAtualizacaoPaciente dados) {
+        var patciente = pacienteRepository.getReferenceById(dados.id());
+        patciente.atualizarInformacoesPaciente(dados);
     }
 }
