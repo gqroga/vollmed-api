@@ -1,15 +1,13 @@
 package com.vollmed.api.controllers;
 
-import com.vollmed.api.medico.DadosCadastroMedico;
-import com.vollmed.api.medico.DadosListagemMedico;
-import com.vollmed.api.medico.Medico;
-import com.vollmed.api.medico.MedicoRepository;
+import com.vollmed.api.medico.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("medicos")
@@ -25,7 +23,14 @@ public class MedicoController {
     }
 
     @GetMapping
-    public List<DadosListagemMedico> listarMedicos() {
-        return medicoRepository.findAll().stream().map(DadosListagemMedico::new).toList();
+    public Page<DadosListagemMedico> listarMedicos(@PageableDefault(size = 10, sort = "nome") Pageable paginacao) {
+        return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizarMedico(@RequestBody @Valid DadosAtualizacaoMedico dados){
+        var medico = medicoRepository.getReferenceById(dados.id());
+        medico.atualizarInformacoesMedico(dados);
     }
 }
