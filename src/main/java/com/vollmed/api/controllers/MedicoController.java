@@ -1,6 +1,6 @@
 package com.vollmed.api.controllers;
 
-import com.vollmed.api.medico.*;
+import com.vollmed.api.domain.medico.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

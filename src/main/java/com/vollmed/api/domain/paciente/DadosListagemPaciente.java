@@ -1,4 +1,4 @@
-package com.vollmed.api.paciente;
+package com.vollmed.api.domain.paciente;
 
 public record DadosListagemPaciente(
         Long id,
