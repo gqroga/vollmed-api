@@ -1,6 +1,6 @@
-package com.vollmed.api.paciente;
+package com.vollmed.api.domain.paciente;
 
-import com.vollmed.api.endereco.Endereco;
+import com.vollmed.api.domain.endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
