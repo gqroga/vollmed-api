@@ -3,6 +3,7 @@ package com.vollmed.api.controllers;
 import com.vollmed.api.domain.consulta.AgendaDeConsultas;
 import com.vollmed.api.domain.consulta.DadosAgendamentoConsulta;
 import com.vollmed.api.domain.consulta.DadosCancelamentoConsulta;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("consultas")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
     @Autowired
